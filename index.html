@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link href="./src/output.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-areas:
+        "a b";
+      gap: 10px;
+    }
+
+    .a {
+      grid-area: a;
+    }
+
+    .b {
+      grid-area: b;
+    }
+  </style>
+</head>
+
+<body id="desktop"
+  class="flex items-center justify-center m-0 box-border min-h-screen font-roboto font-[16px] bg-c-grey">
+  <main id="before" class="grid border border-transparent border-solid rounded-2xl bg-white">
+    <section class="a flex flex-col py-12 pl-12 w-[420px] gap-3">
+      <h1 class="font-bold text-[3.60rem]">Stay updated! </h1>
+      <p class="">Join 60,000+ product managers receiving monthly updates on:</p>
+      <div class="flex items-center"><img src="./assets/images/icon-list.svg" width="20px" height="20px" alt="check">
+        <p class="pl-3">Product discovery and building what matters</p>
+      </div>
+      <div class="flex items-center"><img src="./assets/images/icon-list.svg" width="20px" height="20px" alt="check">
+        <p class="pl-3">Measuring to ensure updates are a success</p>
+      </div>
+      <div class="flex items-center"><img src="./assets/images/icon-list.svg" width="20px" height="20px" alt="check">
+        <p class="pl-3">And much more!</p>
+      </div>
+      <form>
+        <div class="flex flex-col gap-4">
+          <div class="flex justify-between">
+            <p class="font-bold">Email address</p>
+            <p id="valid" class="text-tomato font-bold">Valid email required</p>
+          </div>
+          <input id="input" class="border border-solid border-black px-6 py-3 rounded-lg -mt-3" type="email" id="email"
+            name="email" placeholder="email@company.com" required value="">
+          <button
+            class="border border-solid border-transparent px-6 py-3 rounded-lg bg-d-s-grey text-white hover:bg-tomato duration-300 ease-in-out"
+            onclick="submitbutton()" type="button">Subscribe to monthly newsletter</button>
+        </div>
+      </form>
+    </section>
+    <section class="b">
+      <img class="p-4 object-cover rounded-lg-xl" src="./assets/images/illustration-sign-up-desktop.svg" width="340"
+        height="600" alt="illustration">
+    </section>
+  </main>
+  <!-- Sign-up form end -->
+  <!-- Success message start -->
+  <main id="done" class="flex flex-col border border-transparent border-solid rounded-[32px] bg-white">
+    <div class="py-10 px-14 max-w-[470px] min-h-[350px]">
+      <img class="pb-5" src="./assets/images/icon-success.svg" width="50px" height="50px" alt="icon-success">
+      <span class="font-bold text-[54px] leading-[54px]">Thanks for subscribing!</span>
+      <p class="py-7">A confirmation email has been sent to <span id="msg" class="font-bold"></span>
+        Please open it and click the button inside to confirm your subscription.</p>
+      <button
+        class="w-full mb-2 border border-solid border-transparent px-6 py-3 rounded-lg bg-d-s-grey text-white hover:bg-tomato duration-300 ease-in-out"
+        onclick="dismissbutton()" type="button">Dismiss message</button>
+    </div>
+  </main>
+  <!-- Success message end -->
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Kim</a>. 
+  </div>-->
+  
+  <script>
+    document.getElementById('done').style.display = 'none';
+    document.getElementById('valid').style.display = 'none';
+
+    function submitbutton() {
+      let input = document.getElementById('input').value;
+      let emailRegex = /\S+@\S+\.\S+/;
+
+      if (input == "" || !emailRegex.test(input)) {
+        document.getElementById('valid').style.display = '';
+        document.getElementById('input').classList.add('bg-tomato', 'plac');
+      } else {
+        document.getElementById("msg").innerHTML = input;
+        document.getElementById('done').style.display = 'flex';
+        document.getElementById('before').style.display = 'none';
+        document.getElementById('valid').style.display = '';
+        document.getElementById('input').classList.remove('bg-tomato', 'text-red');
+      }
+    }
+
+    function dismissbutton() {
+      document.getElementById('done').style.display = 'none';
+      document.getElementById('before').style.display = 'flex';
+      document.getElementById('valid').style.display = 'none';
+      document.getElementById('input').value = '';
+    }
+  </script>
+</body>
+
+</html>
